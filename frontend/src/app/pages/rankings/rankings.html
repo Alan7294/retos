@@ -1,0 +1,34 @@
+<div class="rankings-container">
+  <h1>🏆 Rankings</h1>
+  <p class="subtitle">Los mejores resolvedores de retos</p>
+
+  @if (loading) {
+    <div class="loading">Cargando...</div>
+  } @else if (ranking.length === 0) {
+    <div class="empty">No hay datos disponibles</div>
+  } @else {
+    <div class="ranking-table">
+      <div class="table-header">
+        <span class="col-posicion">Posición</span>
+        <span class="col-nombre">Usuario</span>
+        <span class="col-retos">Retos</span>
+        <span class="col-puntos">Puntos</span>
+      </div>
+
+      @for (usuario of ranking; track usuario.idUsuario; let i = $index) {
+        <div class="table-row" [class.top3]="i < 3">
+          <span class="col-posicion">
+            @if (i < 3) {
+              <span class="medal">{{ getMedal(i + 1) }}</span>
+            } @else {
+              <span class="posicion">#{{ i + 1 }}</span>
+            }
+          </span>
+          <span class="col-nombre">{{ usuario.nombre }}</span>
+          <span class="col-retos">{{ usuario.retosCompletados || usuario.RetosCompletados }}</span>
+          <span class="col-puntos">{{ usuario.puntajeTotal }}</span>
+        </div>
+      }
+    </div>
+  }
+</div>

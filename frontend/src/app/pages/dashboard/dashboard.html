@@ -1,0 +1,69 @@
+<div class="dashboard-container">
+  <div class="dashboard-header">
+    <h1>¡Bienvenido, {{ usuario?.nombre }}!</h1>
+    <p class="subtitle">Sigue aprendiendo y completando retos</p>
+  </div>
+
+  @if (loading) {
+    <div class="loading">Cargando...</div>
+  } @else {
+    <div class="stats-grid">
+      <div class="stat-card puntos">
+        <div class="stat-icon">🏆</div>
+        <div class="stat-value">{{ estadisticas?.puntajeTotal || 0 }}</div>
+        <div class="stat-label">Puntos Totales</div>
+      </div>
+      <div class="stat-card completados">
+        <div class="stat-icon">✅</div>
+        <div class="stat-value">{{ estadisticas?.enviosCorrectos || 0 }}</div>
+        <div class="stat-label">Retos Completados</div>
+      </div>
+      <div class="stat-card envios">
+        <div class="stat-icon">📤</div>
+        <div class="stat-value">{{ estadisticas?.totalEnvios || 0 }}</div>
+        <div class="stat-label">Total Envíos</div>
+      </div>
+      <div class="stat-card pendientes">
+        <div class="stat-icon">⏳</div>
+        <div class="stat-value">{{ estadisticas?.enviosPendientes || 0 }}</div>
+        <div class="stat-label">Pendientes</div>
+      </div>
+    </div>
+
+    <div class="quick-actions">
+      <h2>Acciones Rápidas</h2>
+      <div class="actions-grid">
+        <button class="action-btn" routerLink="/retos">
+          <span class="action-icon">🎯</span>
+          <span>Ver Retos</span>
+        </button>
+        <button class="action-btn" routerLink="/rankings">
+          <span class="action-icon">📊</span>
+          <span>Rankings</span>
+        </button>
+        <button class="action-btn" routerLink="/perfil">
+          <span class="action-icon">👤</span>
+          <span>Mi Perfil</span>
+        </button>
+        <button class="action-btn" routerLink="/admin" *ngIf="usuario?.nombre.toLowerCase().includes('admin')">
+          <span class="action-icon">⚙️</span>
+          <span>Admin</span>
+        </button>
+      </div>
+    </div>
+
+    @if (retosRecientes.length > 0) {
+      <div class="recent-section">
+        <h2>Últimos Retos Completados</h2>
+        <div class="recent-list">
+          @for (reto of retosRecientes; track reto.idReto) {
+            <div class="recent-item">
+              <span class="reto-titulo">{{ reto.titulo }}</span>
+              <span class="reto-puntos">+{{ reto.puntos }} pts</span>
+            </div>
+          }
+        </div>
+      </div>
+    }
+  }
+</div>

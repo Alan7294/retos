@@ -1,0 +1,158 @@
+.detalle-container {
+  padding: 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.loading {
+  text-align: center;
+  color: #e0ffff;
+  padding: 3rem;
+}
+
+.reto-info {
+  background: rgba(0, 0, 0, 0.8);
+  border: 1px solid #40e0d0;
+  border-radius: 10px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+
+.header-reto {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.header-reto h1 {
+  color: #40e0d0;
+  margin: 0;
+}
+
+.dificultad {
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-weight: bold;
+  color: #000;
+}
+
+.meta {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 1.5rem;
+  color: #a0a0a0;
+}
+
+.puntos {
+  color: #40e0d0;
+  font-weight: bold;
+}
+
+.descripcion h3 {
+  color: #e0ffff;
+  margin-bottom: 0.5rem;
+}
+
+.descripcion p {
+  color: #e0ffff;
+  line-height: 1.8;
+  white-space: pre-wrap;
+}
+
+.editor-section {
+  background: rgba(0, 0, 0, 0.8);
+  border: 1px solid #40e0d0;
+  border-radius: 10px;
+  padding: 2rem;
+}
+
+.editor-section h2 {
+  color: #40e0d0;
+  margin-bottom: 1.5rem;
+}
+
+.mensaje {
+  padding: 1rem;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+  font-weight: bold;
+}
+
+.mensaje.success {
+  background: rgba(74, 222, 128, 0.2);
+  border: 1px solid #4ade80;
+  color: #4ade80;
+}
+
+.mensaje.error {
+  background: rgba(248, 113, 113, 0.2);
+  border: 1px solid #f87171;
+  color: #f87171;
+}
+
+.editor-wrapper,
+.descripcion-wrapper {
+  margin-bottom: 1.5rem;
+}
+
+label {
+  display: block;
+  color: #e0ffff;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+textarea {
+  width: 100%;
+  padding: 1rem;
+  border: 1px solid #40e0d0;
+  border-radius: 5px;
+  background: rgba(0, 0, 0, 0.5);
+  color: #e0ffff;
+  font-family: 'Courier New', monospace;
+  font-size: 0.95rem;
+  resize: vertical;
+}
+
+textarea:focus {
+  outline: none;
+  border-color: #2ac4b6;
+  box-shadow: 0 0 10px rgba(64, 224, 208, 0.3);
+}
+
+.btn-enviar {
+  background: #40e0d0;
+  color: #000;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+  width: 100%;
+}
+
+.btn-enviar:hover:not(:disabled) {
+  background: #2ac4b6;
+}
+
+.btn-enviar:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.completado-badge {
+  background: rgba(74, 222, 128, 0.2);
+  border: 2px solid #4ade80;
+  border-radius: 10px;
+  padding: 1.5rem;
+  text-align: center;
+  color: #4ade80;
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}

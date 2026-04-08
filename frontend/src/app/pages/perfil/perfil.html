@@ -1,0 +1,103 @@
+<div class="perfil-container">
+  @if (loading) {
+    <div class="loading">Cargando...</div>
+  } @else if (usuario) {
+    <div class="perfil-header">
+      <div class="avatar">{{ usuario.nombre.charAt(0).toUpperCase() }}</div>
+      <div class="info">
+        <h1>{{ usuario.nombre }}</h1>
+        <p>{{ usuario.correo }}</p>
+        <div class="puntaje">
+          <span class="puntos-value">{{ estadisticas?.puntajeTotal || 0 }}</span>
+          <span class="puntos-label">puntos totales</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tabs">
+      <button [class.active]="tabActual === 'estadisticas'" (click)="cambiarTab('estadisticas')">
+        Estadísticas
+      </button>
+      <button [class.active]="tabActual === 'completados'" (click)="cambiarTab('completados')">
+        Retos Completados
+      </button>
+      <button [class.active]="tabActual === 'historial'" (click)="cambiarTab('historial')">
+        Historial
+      </button>
+    </div>
+
+    <div class="tab-content">
+      @if (tabActual === 'estadisticas') {
+        <div class="stats-grid">
+          <div class="stat-card">
+            <span class="stat-value">{{ estadisticas?.totalEnvios || 0 }}</span>
+            <span class="stat-label">Total envíos</span>
+          </div>
+          <div class="stat-card correct">
+            <span class="stat-value">{{ estadisticas?.enviosCorrectos || 0 }}</span>
+            <span class="stat-label">Correctos</span>
+          </div>
+          <div class="stat-card incorrect">
+            <span class="stat-value">{{ estadisticas?.enviosIncorrectos || 0 }}</span>
+            <span class="stat-label">Incorrectos</span>
+          </div>
+          <div class="stat-card pending">
+            <span class="stat-value">{{ estadisticas?.enviosPendientes || 0 }}</span>
+            <span class="stat-label">Pendientes</span>
+          </div>
+        </div>
+
+        @if (estadisticas?.totalEnvios > 0) {
+          <div class="tasa-exito">
+            <h3>Tasa de éxito</h3>
+            <div class="progress-bar">
+              <div class="progress" [style.width.%]="(estadisticas.enviosCorrectos / estadisticas.totalEnvios * 100)"></div>
+            </div>
+            <span>{{ (estadisticas.enviosCorrectos / estadisticas.totalEnvios * 100).toFixed(1) }}%</span>
+          </div>
+        }
+      }
+
+      @if (tabActual === 'completados') {
+        @if (retosCompletados.length === 0) {
+          <div class="empty">No has completado ningún reto aún</div>
+        } @else {
+          <div class="retos-list">
+            @for (reto of retosCompletados; track reto.idReto) {
+              <div class="reto-item">
+                <div class="reto-info">
+                  <h4>{{ reto.titulo }}</h4>
+                  <span class="dificultad">{{ reto.dificultad }}</span>
+                </div>
+                <div class="reto-meta">
+                  <span class="puntos">+{{ reto.puntos }} pts</span>
+                  <span class="fecha">{{ reto.fechaCompletado | date:'dd/MM/yyyy' }}</span>
+                </div>
+              </div>
+            }
+          </div>
+        }
+      }
+
+      @if (tabActual === 'historial') {
+        @if (historial.length === 0) {
+          <div class="empty">No tienes envíos aún</div>
+        } @else {
+          <div class="historial-list">
+            @for (item of historial; track item.idSolucion) {
+              <div class="historial-item">
+                <div class="historial-info">
+                  <h4>{{ item.retoTitulo }}</h4>
+                  <span class="fecha">{{ item.fechaEnvio | date:'dd/MM/yyyy HH:mm' }}</span>
+                </div>
+                <span class="estado" [style.color]="getEstadoColor(item.estado)">
+                  {{ item.estado }}
+                </span>
+              </div>
+            }
+          </div>
+        }
+      }
+    </div>
+  }
+</div>

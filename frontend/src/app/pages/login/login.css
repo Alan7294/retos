@@ -1,0 +1,81 @@
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  /* Gradiente turquesa-negro */
+  background: linear-gradient(135deg, #0a0a0a 40%, #40e0d0 100%);
+}
+
+.login-box {
+  background: rgba(0, 0, 0, 0.85); /* caja negra semi-transparente */
+  color: turquoise;
+  padding: 30px;
+  border-radius: 12px;
+  width: 340px;
+  border: 1px solid turquoise;
+  box-shadow: 0 0 15px rgba(64, 224, 208, 0.6);
+  text-align: center;
+}
+
+h2 {
+  margin-bottom: 20px;
+  color: turquoise;
+}
+
+.form-group {
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+label {
+  color: turquoise;
+  font-weight: bold;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid turquoise;
+  border-radius: 6px;
+  background-color: #000;
+  color: white;
+}
+
+input:focus {
+  outline: none;
+  border-color: #40e0d0;
+  box-shadow: 0 0 8px #40e0d0;
+}
+
+.btn.login {
+  background-color: turquoise;
+  color: black;
+  padding: 12px;
+  width: 100%;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.btn.login:hover {
+  background-color: #00a0a0;
+}
+
+.error-message {
+  margin-top: 10px;
+  color: #f87171;
+  font-weight: bold;
+  text-align: center;
+}
+
+.error-text {
+  color: #f87171;
+  font-size: 0.85rem;
+  margin-top: 0.25rem;
+  display: block;
+}
+

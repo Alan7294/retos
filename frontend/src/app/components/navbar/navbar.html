@@ -1,0 +1,35 @@
+<nav class="navbar">
+  <div class="navbar-brand">
+    <a routerLink="/presentacion" class="logo">RetosCode</a>
+  </div>
+  
+  <button class="menu-toggle" (click)="toggleMenu()" aria-label="Toggle menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+  
+  @if (isLoggedIn) {
+    <div class="navbar-menu" [class.open]="menuOpen">
+      <a routerLink="/retos" routerLinkActive="active" class="nav-link" (click)="closeMenu()">Retos</a>
+      <a routerLink="/rankings" routerLinkActive="active" class="nav-link" (click)="closeMenu()">Rankings</a>
+      <a routerLink="/perfil" routerLinkActive="active" class="nav-link" (click)="closeMenu()">Mi Perfil</a>
+      @if (usuario?.nombre?.toLowerCase().includes('admin')) {
+        <a routerLink="/admin" routerLinkActive="active" class="nav-link admin" (click)="closeMenu()">Admin</a>
+      }
+    </div>
+    
+    <div class="navbar-user" [class.open]="menuOpen">
+      <div class="user-info">
+        <span class="user-name">{{ usuario?.nombre }}</span>
+        <span class="user-score">{{ usuario?.puntajeTotal || 0 }} pts</span>
+      </div>
+      <button (click)="logout()" class="btn-logout">Cerrar Sesión</button>
+    </div>
+  } @else {
+    <div class="navbar-menu" [class.open]="menuOpen">
+      <a routerLink="/login" class="nav-link" (click)="closeMenu()">Login</a>
+      <a routerLink="/register" class="nav-link" (click)="closeMenu()">Register</a>
+    </div>
+  }
+</nav>

@@ -1,0 +1,51 @@
+<div class="retos-container">
+  <div class="header">
+    <h1>Retos de Programación</h1>
+    @if (usuario) {
+      <div class="filtros">
+        <select [(ngModel)]="filtroDificultad" (change)="aplicarFiltros()">
+          <option value="">Todas las dificultades</option>
+          @for (diff of dificultadOptions; track diff) {
+            <option [value]="diff">{{ diff }}</option>
+          }
+        </select>
+        
+        <select [(ngModel)]="ordenarPor" (change)="aplicarFiltros()">
+          <option value="fecha">Más recientes</option>
+          <option value="puntos">Mayores puntos</option>
+          <option value="titulo">Por título</option>
+        </select>
+      </div>
+    }
+  </div>
+
+  @if (loading) {
+    <div class="loading">Cargando retos...</div>
+  } @else if (retos.length === 0) {
+    <div class="empty">No hay retos disponibles</div>
+  } @else {
+    <div class="retos-grid">
+      @for (reto of retos; track reto.idReto) {
+        <div class="reto-card" [class.completado]="reto.completado">
+          @if (reto.completado) {
+            <div class="badge-completado">✓ Completado</div>
+          }
+          
+          <div class="reto-header">
+            <h3>{{ reto.titulo }}</h3>
+            <span class="dificultad" [style.background-color]="getDificultadColor(reto.dificultad)">
+              {{ reto.dificultad }}
+            </span>
+          </div>
+          
+          <p class="descripcion">{{ reto.descripcion.substring(0, 100) }}{{ reto.descripcion.length > 100 ? '...' : '' }}</p>
+          
+          <div class="reto-footer">
+            <span class="puntos">{{ reto.puntos }} pts</span>
+            <a [routerLink]="['/reto', reto.idReto]" class="btn-ver">Ver reto</a>
+          </div>
+        </div>
+      }
+    </div>
+  }
+</div>

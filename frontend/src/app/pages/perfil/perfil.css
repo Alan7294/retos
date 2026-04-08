@@ -1,0 +1,204 @@
+.perfil-container {
+  padding: 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.loading {
+  text-align: center;
+  color: #e0ffff;
+  padding: 3rem;
+}
+
+.perfil-header {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  background: rgba(0, 0, 0, 0.8);
+  border: 1px solid #40e0d0;
+  border-radius: 10px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+
+.avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: #40e0d0;
+  color: #000;
+  font-size: 3rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.info h1 {
+  color: #40e0d0;
+  margin: 0 0 0.5rem 0;
+}
+
+.info p {
+  color: #a0a0a0;
+  margin: 0 0 1rem 0;
+}
+
+.puntaje {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.puntos-value {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #40e0d0;
+}
+
+.puntos-label {
+  color: #a0a0a0;
+}
+
+.tabs {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.tabs button {
+  background: transparent;
+  border: 1px solid #40e0d0;
+  color: #40e0d0;
+  padding: 0.8rem 1.5rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.tabs button:hover,
+.tabs button.active {
+  background: #40e0d0;
+  color: #000;
+}
+
+.tab-content {
+  background: rgba(0, 0, 0, 0.8);
+  border: 1px solid #40e0d0;
+  border-radius: 10px;
+  padding: 2rem;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+}
+
+.stat-card {
+  background: rgba(64, 224, 208, 0.1);
+  border: 1px solid #40e0d0;
+  border-radius: 10px;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.stat-card.correct { border-color: #4ade80; background: rgba(74, 222, 128, 0.1); }
+.stat-card.incorrect { border-color: #f87171; background: rgba(248, 113, 113, 0.1); }
+.stat-card.pending { border-color: #fbbf24; background: rgba(251, 191, 36, 0.1); }
+
+.stat-value {
+  display: block;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #40e0d0;
+  margin-bottom: 0.5rem;
+}
+
+.stat-card.correct .stat-value { color: #4ade80; }
+.stat-card.incorrect .stat-value { color: #f87171; }
+.stat-card.pending .stat-value { color: #fbbf24; }
+
+.stat-label {
+  color: #a0a0a0;
+  font-size: 0.9rem;
+}
+
+.tasa-exito {
+  margin-top: 2rem;
+}
+
+.tasa-exito h3 {
+  color: #e0ffff;
+  margin-bottom: 1rem;
+}
+
+.progress-bar {
+  height: 20px;
+  background: rgba(64, 224, 208, 0.2);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+}
+
+.progress {
+  height: 100%;
+  background: #4ade80;
+  transition: width 0.5s;
+}
+
+.empty {
+  text-align: center;
+  color: #a0a0a0;
+  padding: 2rem;
+}
+
+.retos-list, .historial-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.reto-item, .historial-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background: rgba(64, 224, 208, 0.05);
+  border-radius: 5px;
+  border: 1px solid rgba(64, 224, 208, 0.2);
+}
+
+.reto-info h4, .historial-info h4 {
+  color: #e0ffff;
+  margin: 0 0 0.5rem 0;
+}
+
+.dificultad {
+  background: #40e0d0;
+  color: #000;
+  padding: 0.2rem 0.6rem;
+  border-radius: 10px;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.reto-meta, .historial-info {
+  text-align: right;
+}
+
+.puntos {
+  color: #4ade80;
+  font-weight: bold;
+  display: block;
+}
+
+.fecha {
+  color: #a0a0a0;
+  font-size: 0.9rem;
+}
+
+.estado {
+  font-weight: bold;
+  text-transform: uppercase;
+}

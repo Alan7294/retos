@@ -1,0 +1,183 @@
+<div class="admin-container">
+  <h1>Panel de Administración</h1>
+
+  <div class="crear-reto-section">
+    <h2>Crear Nuevo Reto</h2>
+    
+    @if (mensaje) {
+      <div class="mensaje" [class]="tipoMensaje">{{ mensaje }}</div>
+    }
+
+    <form (ngSubmit)="crearReto()">
+      <div class="form-group">
+        <label for="titulo">Título del reto:</label>
+        <input 
+          type="text" 
+          id="titulo"
+          [(ngModel)]="titulo" 
+          name="titulo"
+          placeholder="Ej: Sumar dos números"
+          required
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="descripcion">Descripción:</label>
+        <textarea 
+          id="descripcion"
+          [(ngModel)]="descripcion" 
+          name="descripcion"
+          placeholder="Describe el reto..."
+          rows="5"
+          required
+        ></textarea>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="dificultad">Dificultad:</label>
+          <select id="dificultad" [(ngModel)]="dificultad" name="dificultad">
+            @for (diff of dificultadOptions; track diff) {
+              <option [value]="diff">{{ diff }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="puntos">Puntos:</label>
+          <input 
+            type="number" 
+            id="puntos"
+            [(ngModel)]="puntos" 
+            name="puntos"
+            min="1"
+          >
+        </div>
+      </div>
+
+      <button type="submit" class="btn-crear" [disabled]="enviando">
+        {{ enviando ? 'Creando...' : 'Crear Reto' }}
+      </button>
+    </form>
+  </div>
+
+  <div class="retos-section">
+    <h2>Retos Existentes</h2>
+    
+    <button class="btn-ver-soluciones" (click)="verTodasSoluciones()">Ver Todas las Soluciones</button>
+    
+    @if (loading) {
+      <div class="loading">Cargando...</div>
+    } @else if (retos.length === 0) {
+      <div class="empty">No hay retos creados</div>
+    } @else {
+      <div class="retos-list">
+        @for (reto of retos; track reto.idReto) {
+          <div class="reto-item">
+            @if (editandoId === reto.idReto) {
+              <div class="edit-form">
+                <div class="form-group">
+                  <label>Título:</label>
+                  <input type="text" [(ngModel)]="editTitulo" name="editTitulo">
+                </div>
+                <div class="form-group">
+                  <label>Descripción:</label>
+                  <textarea [(ngModel)]="editDescripcion" name="editDescripcion" rows="3"></textarea>
+                </div>
+                <div class="form-row">
+                  <div class="form-group">
+                    <label>Dificultad:</label>
+                    <select [(ngModel)]="editDificultad" name="editDificultad">
+                      @for (diff of dificultadOptions; track diff) {
+                        <option [value]="diff">{{ diff }}</option>
+                      }
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label>Puntos:</label>
+                    <input type="number" [(ngModel)]="editPuntos" name="editPuntos" min="1">
+                  </div>
+                </div>
+                <div class="edit-actions">
+                  <button class="btn-guardar" (click)="guardarEdicion(reto.idReto)">Guardar</button>
+                  <button class="btn-cancelar" (click)="cancelarEdicion()">Cancelar</button>
+                </div>
+              </div>
+            } @else {
+              <div class="reto-info">
+                <h3>{{ reto.titulo }}</h3>
+                <p class="descripcion">{{ reto.descripcion }}</p>
+                <div class="reto-meta">
+                  <span class="dificultad-badge">{{ reto.dificultad }}</span>
+                  <span class="puntos">{{ reto.puntos }} pts</span>
+                </div>
+              </div>
+              <div class="reto-actions">
+                <button class="btn-ver" (click)="verSoluciones(reto.idReto)">Ver Soluciones</button>
+                <button class="btn-editar" (click)="iniciarEdicion(reto)">Editar</button>
+                <button class="btn-eliminar" (click)="eliminarReto(reto.idReto)">Eliminar</button>
+              </div>
+            }
+          </div>
+        }
+      </div>
+    }
+  </div>
+
+  @if (mostrarSoluciones) {
+    <div class="soluciones-modal">
+      <div class="soluciones-content">
+        <div class="soluciones-header">
+          <h2>
+            @if (verSolucionesRetoId) {
+              Soluciones del Reto
+            } @else {
+              Todas las Soluciones
+            }
+          </h2>
+          <button class="btn-cerrar" (click)="cerrarSoluciones()">X</button>
+        </div>
+        
+        @if (solucionesLoading) {
+          <div class="loading">Cargando soluciones...</div>
+        } @else if (soluciones.length === 0) {
+          <div class="empty">No hay soluciones</div>
+        } @else {
+          @for (grupo of getSolucionesPorReto(); track grupo.titulo) {
+            <div class="grupo-reto">
+              <h3 class="grupo-titulo">{{ grupo.titulo }}</h3>
+              <span class="grupo-count">{{ grupo.soluciones.length }} solución(es)</span>
+            </div>
+            @for (sol of grupo.soluciones; track sol.idSolucion || sol.IdSolucion) {
+              <div class="solucion-item">
+                <div class="solucion-header">
+                  <span class="usuario">{{ sol.usuarioNombre || sol.UsuarioNombre }}</span>
+                  <span class="estado" [style.color]="getEstadoColor(sol.estado || sol.Estado)">
+                    {{ sol.estado || sol.Estado }}
+                  </span>
+                </div>
+                <div class="codigo">
+                  <pre>{{ sol.codigo || sol.Codigo }}</pre>
+                </div>
+                @if (sol.descripcion || sol.Descripcion) {
+                  <div class="descripcion">{{ sol.descripcion || sol.Descripcion }}</div>
+                }
+                <div class="fecha">{{ sol.fechaEnvio || sol.FechaEnvio | date:'dd/MM/yyyy HH:mm' }}</div>
+                @if ((sol.estado || sol.Estado) === 'pendiente') {
+                  <div class="evaluar-actions">
+                    <button class="btn-correcto" (click)="evaluarSolucion(sol.idSolucion || sol.IdSolucion, 'correcto')">
+                      ✓ Aprobar
+                    </button>
+                    <button class="btn-incorrecto" (click)="evaluarSolucion(sol.idSolucion || sol.IdSolucion, 'incorrecto')">
+                      ✗ Rechazar
+                    </button>
+                  </div>
+                }
+              </div>
+            }
+          }
+        }
+      </div>
+    </div>
+  }
+</div>

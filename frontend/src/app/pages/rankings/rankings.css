@@ -1,0 +1,83 @@
+.rankings-container {
+  padding: 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+h1 {
+  color: #40e0d0;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  text-align: center;
+  color: #a0a0a0;
+  margin-bottom: 2rem;
+}
+
+.loading, .empty {
+  text-align: center;
+  color: #e0ffff;
+  padding: 3rem;
+}
+
+.ranking-table {
+  background: rgba(0, 0, 0, 0.8);
+  border: 1px solid #40e0d0;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.table-header {
+  display: grid;
+  grid-template-columns: 100px 1fr 100px 100px;
+  padding: 1rem 1.5rem;
+  background: rgba(64, 224, 208, 0.1);
+  border-bottom: 1px solid #40e0d0;
+  font-weight: bold;
+  color: #40e0d0;
+}
+
+.table-row {
+  display: grid;
+  grid-template-columns: 100px 1fr 100px 100px;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid rgba(64, 224, 208, 0.2);
+  transition: background 0.3s;
+}
+
+.table-row:last-child {
+  border-bottom: none;
+}
+
+.table-row:hover {
+  background: rgba(64, 224, 208, 0.1);
+}
+
+.table-row.top3 {
+  background: rgba(64, 224, 208, 0.15);
+}
+
+.col-posicion {
+  font-weight: bold;
+}
+
+.medal {
+  font-size: 1.5rem;
+}
+
+.posicion {
+  color: #a0a0a0;
+}
+
+.col-nombre {
+  color: #e0ffff;
+  font-weight: bold;
+}
+
+.col-retos,
+.col-puntos {
+  text-align: center;
+  color: #40e0d0;
+}

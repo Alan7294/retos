@@ -1,0 +1,70 @@
+<div class="detalle-container">
+  @if (loading) {
+    <div class="loading">Cargando...</div>
+  } @else if (reto) {
+    <div class="reto-info">
+      <div class="header-reto">
+        <h1>{{ reto.titulo }}</h1>
+        <span class="dificultad" [style.background-color]="getDificultadColor(reto.dificultad)">
+          {{ reto.dificultad }}
+        </span>
+      </div>
+      
+      <div class="meta">
+        <span class="puntos">{{ reto.puntos }} puntos</span>
+        <span class="fecha">Creado: {{ reto.fechaCreacion | date:'dd/MM/yyyy' }}</span>
+      </div>
+
+      <div class="descripcion">
+        <h3>Descripción</h3>
+        <p>{{ reto.descripcion }}</p>
+      </div>
+    </div>
+
+    <div class="editor-section">
+      <h2>Enviar tu solución</h2>
+      
+      @if (yaCompletado) {
+        <div class="completado-badge">
+          ✓ Ya completaste este reto
+        </div>
+      }
+      
+      @if (mensaje) {
+        <div class="mensaje" [class]="tipoMensaje">{{ mensaje }}</div>
+      }
+
+      @if (!yaCompletado) {
+        <div class="editor-wrapper">
+          <label for="codigo">Tu código:</label>
+          <textarea 
+            id="codigo"
+            [(ngModel)]="codigo"
+            placeholder="// Escribe tu código aquí..."
+            rows="15"
+            [disabled]="enviando"
+          ></textarea>
+        </div>
+
+        <div class="descripcion-wrapper">
+          <label for="descripcion">Descripción (opcional):</label>
+          <textarea 
+            id="descripcion"
+            [(ngModel)]="descripcion"
+            placeholder="Explica tu approach..."
+            rows="3"
+            [disabled]="enviando"
+          ></textarea>
+        </div>
+
+        <button 
+          class="btn-enviar" 
+          (click)="enviarSolucion()"
+          [disabled]="enviando"
+        >
+          {{ enviando ? 'Enviando...' : 'Enviar solución' }}
+        </button>
+      }
+    </div>
+  }
+</div>
