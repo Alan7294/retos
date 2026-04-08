@@ -1,0 +1,35 @@
+# Dependencies
+node_modules/
+vendor/
+bin/
+obj/
+
+# Build outputs
+dist/
+publish/
+out/
+
+# IDE
+.vs/
+.vscode/
+.idea/
+*.user
+*.suo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Environment
+.env
+.env.local
+
+# Database
+*.db
+*.sqlite
+
+# Docker
+docker-compose.override.yml

@@ -1,0 +1,30 @@
+services:
+  postgres-db:
+    image: postgres:16-alpine
+    container_name: itam_postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password123
+      POSTGRES_DB: itam_db
+    ports:
+      - "5433:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./init-scripts:/docker-entrypoint-initdb.d
+    restart: unless-stopped
+
+  keycloak-auth:
+    image: quay.io/keycloak/keycloak:26.0
+    container_name: itam_keycloak
+    command: start-dev
+    environment:
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres-db
+    restart: unless-stopped
+
+volumes:
+  pgdata:
